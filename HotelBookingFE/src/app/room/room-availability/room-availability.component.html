@@ -1,0 +1,28 @@
+<div>
+  <label for="pax">Number of Guests:</label>
+  <input type="number" id="pax" [(ngModel)]="pax" />
+
+  <label for="checkInDate">Check-In Date:</label>
+  <input type="date" id="checkInDate" [(ngModel)]="checkInDate" />
+
+  <label for="checkOutDate">Check-Out Date:</label>
+  <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" />
+
+  <button (click)="checkAvailability()">Check Availability</button>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <div *ngIf="availableRooms.length > 0">
+    <h3>Available Rooms</h3>
+    <ul>
+      <li *ngFor="let room of availableRooms">
+        <input type="checkbox" [(ngModel)]="room.selected" />
+        Room ID: {{ room.roomID }} {{ room.name }} - pax {{ room.pax }} {{ room.price | currency }}
+      </li>
+    </ul>
+    <button (click)="addToCart()">Add to Cart</button>
+  </div>
+</div>
+
+
+

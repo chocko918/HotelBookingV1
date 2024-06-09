@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Room ID</th>
+      <th> Name </th>
+      <th>Pax</th>
+      <th> Price </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of RoomList">
+      <td>{{ room.roomID }}</td>
+      <td>{{ room.name }}</td>
+      <td>{{ room.pax }}</td>
+      <td>{{ room.price }}</td>
+    </tr>
+  </tbody>
+</table>
