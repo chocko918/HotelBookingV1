@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServicesService } from '../../services.service'; // Import your authentication service
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service'; // Import CookieService
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,11 @@ export class LoginComponent {
   errorMessage: string = "" ;
   //customer: any; // Variable to hold customer details
 
-  constructor(private authService: ServicesService, private router: Router){ }
+  constructor(
+    private authService: ServicesService,
+    private router: Router,
+    private cookieService: CookieService // Inject CookieService
+  ) { }
 
   login() {
      console.log(this.email, this.password)
@@ -36,6 +41,7 @@ export class LoginComponent {
       user => {
         this.errorMessage = '';
         // Handle successful login
+        this.cookieService.set('customerID', user.customerID);
         console.log("Login successful, token: ", user);
         this.router.navigate(['/loginpage'], { state: { token: user.token, user: user.user } }); 
       },

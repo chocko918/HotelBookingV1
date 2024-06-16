@@ -19,7 +19,8 @@ namespace HotelBooking2.Controllers
             try
             {
                 var rooms = await _cartRepository.GetAllCartItems();
-                return Ok(rooms);
+                var totalPrice = await _cartRepository.TotalCartPrice();
+                return Ok(new { rooms, totalPrice });
             }
             catch (Exception ex)
             {
@@ -34,6 +35,7 @@ namespace HotelBooking2.Controllers
             try
             {
                 var cartItem = await _cartRepository.AddItemToCartAsync(request.RoomID, request.CheckInDate, request.CheckOutDate);
+                //var totalPrice = await _cartRepository.TotalCartPrice();
                 return Ok(cartItem);
             }
             catch (Exception ex)
@@ -44,7 +46,7 @@ namespace HotelBooking2.Controllers
 
 
         [HttpDelete("DeleteCartItem")]
-        public async Task<IActionResult> DeleteCartItem(Guid itemID)
+        public async Task<IActionResult> DeleteCartItem([FromQuery] Guid itemID)
         {
             try
             {

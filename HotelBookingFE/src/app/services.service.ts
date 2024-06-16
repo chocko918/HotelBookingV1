@@ -3,6 +3,8 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse,HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { CartResponse } from './cart/cart.model';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
@@ -49,9 +51,9 @@ export class ServicesService {
     );
   }
 
-  addItemToCart(roomID: number, checkInDate: Date, checkOutDate: Date): Observable<any> {
-    const formattedCheckInDate = formatDate(checkInDate, 'yyyy-MM-dd', 'en-US');
-    const formattedCheckOutDate = formatDate(checkOutDate, 'yyyy-MM-dd', 'en-US');
+  addItemToCart(roomID: number, checkInDate1: Date, checkOutDate1: Date): Observable<any> {
+    const checkInDate = formatDate(checkInDate1, 'yyyy-MM-dd', 'en-US');
+    const checkOutDate = formatDate(checkOutDate1, 'yyyy-MM-dd', 'en-US');
     //const params = new HttpParams()
     //  .set('roomID', roomID.toString())
     //  .set('checkInDate', formattedCheckInDate)
@@ -59,8 +61,8 @@ export class ServicesService {
     //console.log(roomID, checkInDate, checkOutDate);
     const params = {
       roomID,
-      formattedCheckInDate,
-      formattedCheckOutDate
+      checkInDate,
+      checkOutDate
     }
     //const payload = {
     //  RoomID: RoomId.toString(),
@@ -73,6 +75,25 @@ export class ServicesService {
 
     );
   }
+
+  getAllCartItems(): Observable<CartResponse> {
+    return this.https.get<CartResponse>(this.APIUrl + '/getAllCartItems')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  deleteCartItem(itemID: string): Observable<any> {
+    return this.https.delete(this.APIUrl + '/DeleteCartItem', { params: { itemID } });
+  }
+
+  confirmCartItem(customerID: string):Observable < any > {
+      return this.https.post<any>(`${this.APIUrl}/confirm`, { customerID})
+        .pipe(
+          catchError(this.handleError)
+        );
+ }
+  
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';

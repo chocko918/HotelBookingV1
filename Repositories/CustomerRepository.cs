@@ -45,7 +45,7 @@ namespace HotelBooking2.Repositories
             {
                 Email = customer.Email,
                 Password = hashedPassword,
-                Name = customer.Name,
+                CustomerName = customer.CustomerName,
                 Birthday = customer.Birthday
             };
 
@@ -110,9 +110,9 @@ namespace HotelBooking2.Repositories
 
         public async Task UpdateCustomer(Customer existingCustomer, UpdateCustomerDTO updatedCustomerDto)
         {
-            if (!string.IsNullOrEmpty(updatedCustomerDto.Name))
+            if (!string.IsNullOrEmpty(updatedCustomerDto.CustomerName))
             {
-                existingCustomer.Name = updatedCustomerDto.Name;
+                existingCustomer.CustomerName = updatedCustomerDto.CustomerName;
             }
             if (!string.IsNullOrEmpty(updatedCustomerDto.Email))
             {

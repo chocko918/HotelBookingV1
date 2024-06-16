@@ -45,11 +45,11 @@ namespace HotelBooking2.Controllers
 
         // POST api/booking/confirm
         [HttpPost("confirm")]
-        public async Task<IActionResult> ConfirmBooking()
+        public async Task<IActionResult> ConfirmBooking(Guid CustomerGuID)
         {
             try
             {
-                await _bookingRepository.ConfirmBooking();
+                await _bookingRepository.ConfirmBooking(CustomerGuID);
                 return Ok("Booking confirmed successfully!");
             }
             catch (Exception ex)
@@ -59,6 +59,20 @@ namespace HotelBooking2.Controllers
                 // Extract and return the inner exception message if available
                 string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 return StatusCode(500, $"An error occurred while confirming booking: {errorMessage}");
+            }
+        }
+
+        [HttpPost("getBookingByCustomerID")]
+        public async Task<IActionResult> GetBookingByCustomerID(Guid customerID)
+        {
+            try
+            {
+                var bookingsByCustomerID = await _bookingRepository.GetBookingByCustomerID(customerID);
+                return Ok(bookingsByCustomerID);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error: {ex.Message}");
             }
         }
 

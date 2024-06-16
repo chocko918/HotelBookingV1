@@ -9,5 +9,7 @@ namespace HotelBooking2.Repositories
         Task<List<Cart>> GetAllCartItems();
 
         Task DeleteCartItemByID(Guid itemID);
+
+        Task<decimal> TotalCartPrice();
     }
 }

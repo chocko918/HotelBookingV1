@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerLoginPageComponent } from './customer/login/customer-login-page/customer-login-page.component';
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { RoomAvailabilityComponent } from './room/room-availability/room-availab
     LoginComponent,
     CustomerLoginPageComponent,
     RoomAvailabilityComponent,
+    CartComponent,
 
   ],
   imports: [
@@ -35,7 +38,11 @@ import { RoomAvailabilityComponent } from './room/room-availability/room-availab
     NgbModule,
 
   ],
-  providers: [ServicesService],
+  providers: [
+    ServicesService,
+    CookieService,
+  ],
+   
   bootstrap: [AppComponent]
 })
 export class AppModule { }

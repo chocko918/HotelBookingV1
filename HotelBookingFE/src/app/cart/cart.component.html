@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Item ID</th>
+      <th>Room ID</th>
+      <th>Room</th>
+      <th style="text-align: right;">Price</th>
+      <th>CheckInDate</th>
+      <th>CheckOutDate</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cart of CartList">
+      <td>{{ cart.itemID }}</td>
+      <td>{{ cart.roomID }}</td>
+      <td>{{ cart.name }}</td>
+      <td style="text-align: right;">{{ cart.price }}</td>
+      <td>{{ cart.checkInDate }}</td>
+      <td>{{ cart.checkOutDate }}</td>
+      <td>
+        <button (click)="deleteCartItem(cart.itemID)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td style="text-align: right;">Total Price: {{ TotalPrice }}</td>
+      <td colspan="3"></td>
+    </tr>
+  </tbody>
+</table>

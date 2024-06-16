@@ -1,14 +1,27 @@
 <div>
   <label for="pax">Number of Guests:</label>
-  <input type="number" id="pax" [(ngModel)]="pax" />
+  <input type="number" id="pax" [(ngModel)]="pax" name="pax" min="1" max="4" required #paxField="ngModel" />
+  <div *ngIf="paxField.invalid && (paxField.dirty || paxField.touched)" class="error-message">
+    <div *ngIf="paxField.errors?.['required']">Number of guests is required.</div>
+    <div *ngIf="paxField.errors?.['min']">Number of guests must be at least 1.</div>
+    <div *ngIf="paxField.errors?.['max']">Number of guests cannot exceed 4.</div>
+  </div>
 
   <label for="checkInDate">Check-In Date:</label>
-  <input type="date" id="checkInDate" [(ngModel)]="checkInDate" />
+  <input type="date" id="checkInDate" [(ngModel)]="checkInDate" name="checkInDate" [attr.min]="today" [attr.max]="maxDate" required #checkInDateField="ngModel" />
+  <div *ngIf="checkInDateField.invalid && (checkInDateField.dirty || checkInDateField.touched)" class="error-message">
+    <div *ngIf="checkInDateField.errors?.['required']">Check-in date is required.</div>
+    <div *ngIf="checkInDateField.errors?.['min'] || checkInDateField.errors?.['max']">Check-in date must be between today and one year from today.</div>
+  </div>
 
   <label for="checkOutDate">Check-Out Date:</label>
-  <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" />
+  <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" name="checkOutDate" [attr.min]="today" [attr.max]="maxDate" required #checkOutDateField="ngModel" />
+  <div *ngIf="checkOutDateField.invalid && (checkOutDateField.dirty || checkOutDateField.touched)" class="error-message">
+    <div *ngIf="checkOutDateField.errors?.['required']">Check-out date is required.</div>
+    <div *ngIf="checkOutDateField.errors?.['min'] || checkOutDateField.errors?.['max']">Check-out date must be between today and one year from today.</div>
+  </div>
 
-  <button (click)="checkAvailability()">Check Availability</button>
+  <button (click)="checkAvailability()" [disabled]="paxField.invalid || checkInDateField.invalid || checkOutDateField.invalid">Check Availability</button>
 
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
@@ -23,6 +36,3 @@
     <button (click)="addToCart()">Add to Cart</button>
   </div>
 </div>
-
-
-

@@ -12,6 +12,8 @@ export class RoomAvailabilityComponent {
   pax!: number;
   checkInDate!: Date;
   checkOutDate!: Date;
+  today!: string;
+  maxDate!: string;
   errorMessage: string = "";
   roomID!: number;
 
@@ -19,6 +21,14 @@ export class RoomAvailabilityComponent {
 
   constructor(private service: ServicesService, private router: Router) { }
 
+  ngOnInit() {
+    const currentDate = new Date();
+    const nextYearDate = new Date();
+    nextYearDate.setFullYear(currentDate.getFullYear() + 1);
+
+    this.today = currentDate.toISOString().split('T')[0];
+    this.maxDate = nextYearDate.toISOString().split('T')[0];
+  }
 
   checkAvailability() {
 

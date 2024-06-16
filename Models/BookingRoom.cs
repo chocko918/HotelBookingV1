@@ -16,10 +16,17 @@ namespace HotelBooking2.Models
         public int RoomID { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public int Pax { get; set; }
 
+        [Required]
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal Price { get; set; }
+
         [ForeignKey("RoomID")] // Add this attribute to specify the foreign key relationship
-        [JsonIgnore]
+        //[JsonIgnore]
         public Room Room { get; set; } // Navigation property for the Room entity
 
         [Required]
@@ -34,6 +41,7 @@ namespace HotelBooking2.Models
 
         [Required]
         [ForeignKey("BookingID")]
+        [JsonIgnore]
         public Booking Booking { get; set; }
     }
 

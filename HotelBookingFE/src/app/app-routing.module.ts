@@ -6,6 +6,7 @@ import { LoginComponent } from './customer/login/login.component';
 import { CustomerLoginPageComponent } from './customer/login/customer-login-page/customer-login-page.component';
 import { RoomComponent } from './room/room.component';
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'loginpage', component: CustomerLoginPageComponent },
   { path: 'room', component: RoomComponent },
   { path: 'roomAvailability', component: RoomAvailabilityComponent },
+  { path: 'cart', component: CartComponent},
 
 ];
 

@@ -21,7 +21,7 @@ namespace HotelBooking2.CustomerValidation
                 .EmailAddress().WithMessage("Invalid email format")
                 .MustAsync(BeUniqueEmail).WithMessage("Email already exists");
 
-            RuleFor(c => c.Name)
+            RuleFor(c => c.CustomerName)
                 .NotEmpty().WithMessage("Name is required")
                 .Matches("^[a-zA-Z ]*$").WithMessage("Name can only consist of alphabets");
 

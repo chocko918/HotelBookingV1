@@ -12,5 +12,7 @@ namespace HotelBooking2.Repositories
         Task<List<Customer>> GetAllCustomers();
         Task DeleteCustomer(string email, string password);
         Task UpdateCustomer(Customer existingCustomer, UpdateCustomerDTO updatedCustomerDto);
+
+
     }
 }

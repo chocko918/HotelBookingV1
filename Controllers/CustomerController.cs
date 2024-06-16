@@ -6,6 +6,7 @@ using HotelBooking2.CustomerValidation;
 using FluentValidation;
 using HotelBooking2.Helpers;
 using HotelBooking2.Service;
+using System.Security.Claims;
 
 namespace HotelBooking2.Controllers
 {
@@ -50,6 +51,7 @@ namespace HotelBooking2.Controllers
 
             if (user == null)
                 return BadRequest(new { Message = "Invalid Email or password" });
+
 
             var token = await _jwtService.GenerateJwtTokenAsync(user);
 
