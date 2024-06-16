@@ -27,12 +27,28 @@
 
   <div *ngIf="availableRooms.length > 0">
     <h3>Available Rooms</h3>
-    <ul>
-      <li *ngFor="let room of availableRooms">
-        <input type="checkbox" [(ngModel)]="room.selected" />
-        Room ID: {{ room.roomID }} {{ room.name }} - pax {{ room.pax }} {{ room.price | currency }}
-      </li>
-    </ul>
+    <table class="room-table">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Image</th>
+          <th>Room ID</th>
+          <th>Name</th>
+          <th>Guests</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let room of availableRooms">
+          <td><input type="checkbox" [(ngModel)]="room.selected" /></td>
+          <td><img [src]="getRoomImage(room.name)" alt="{{ room.name }}" class="room-image" /></td>
+          <td>{{ room.roomID }}</td>
+          <td>{{ room.name }}</td>
+          <td>{{ room.pax }}</td>
+          <td>{{ room.price | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
     <button (click)="addToCart()">Add to Cart</button>
   </div>
 </div>

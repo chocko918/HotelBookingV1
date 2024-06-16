@@ -2,3 +2,23 @@
   color: red;
   margin-top: 10px;
 }
+
+.room-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+  .room-table th, .room-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .room-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+
+.room-image {
+  width: 100px; /* Adjust the width as needed */
+  height: auto;
+}

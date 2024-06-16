@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
+import { v4 as uuidv4 } from 'uuid';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +37,7 @@ import { CartComponent } from './cart/cart.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+
 
   ],
   providers: [

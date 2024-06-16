@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@babel/helper-create-class-features-plugin": "^7.24.7",
+    "@babel/helper-member-expression-to-functions": "^7.24.7",
+    "ngx-cookie-service": "^17.0.0"
+  }
+}

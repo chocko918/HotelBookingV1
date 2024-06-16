@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { CartResponse } from './cart/cart.model';
 import { CookieService } from 'ngx-cookie-service';
+import { v4 as uuidv4 } from 'uuid';
 
 
 @Injectable({
@@ -87,12 +88,30 @@ export class ServicesService {
     return this.https.delete(this.APIUrl + '/DeleteCartItem', { params: { itemID } });
   }
 
-  confirmCartItem(customerID: string):Observable < any > {
-      return this.https.post<any>(`${this.APIUrl}/confirm`, { customerID})
-        .pipe(
-          catchError(this.handleError)
-        );
- }
+  //confirmCartItem(customerID: string): Observable<any> {
+  //  console.log('Request URL:', `${this.APIUrl}/confirm`, customerID);
+  //  return this.https.post<any>(`${this.APIUrl}/confirm`, {customerID })
+  //      .pipe(
+  //        catchError(this.handleError)
+  //      );
+  //}
+
+  
+  confirmCartItem(customerID: string): Observable<any> {
+    return this.https.post<any>(`${this.APIUrl}/confirm`, { customerID }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+
+  getBookingsByCustomerID(customerID: string): Observable<any> {
+
+    return this.https.post<any>(`${this.APIUrl}/getBookingByCustomerID`, { customerID }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   
 
   private handleError(error: HttpErrorResponse) {

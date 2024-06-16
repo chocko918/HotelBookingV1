@@ -29,3 +29,16 @@
     </tr>
   </tbody>
 </table>
+
+<button (click)="confirmCartItem()" class="btn btn-primary">Confirm Booking</button>
+
+
+<button (click)="getBookingsByCustomer()" class="btn btn-primary">Get bookings by customerID</button>
+
+<!-- Display Confirmed Bookings -->
+<!--<div *ngIf="confirmedBookings">
+  <h3>Confirmed Bookings:</h3>
+  <ul>
+    <li *ngFor="let booking of confirmedBookings">{{ booking }}</li>
+  </ul>
+</div>-->

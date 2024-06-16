@@ -72,6 +72,8 @@ export class RoomAvailabilityComponent {
     });
   }
 
-
+  getRoomImage(roomName: string): string {
+    return `assets/RoomImages/${roomName}.png`;
+  }
 
 }

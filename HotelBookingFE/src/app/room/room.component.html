@@ -2,9 +2,10 @@
   <thead>
     <tr>
       <th>Room ID</th>
-      <th> Name </th>
+      <th>Name</th>
       <th>Pax</th>
-      <th> Price </th>
+      <th>Price</th>
+      <th>Image</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
       <td>{{ room.name }}</td>
       <td>{{ room.pax }}</td>
       <td>{{ room.price }}</td>
+      <td><img [src]="getRoomImage(room.name)" alt="{{ room.name }}" height="100"></td>
     </tr>
   </tbody>
 </table>

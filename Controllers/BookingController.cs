@@ -1,7 +1,9 @@
-﻿using HotelBooking2.Models;
+﻿using Azure.Core;
+using HotelBooking2.Models;
 using HotelBooking2.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace HotelBooking2.Controllers
 {
@@ -43,38 +45,65 @@ namespace HotelBooking2.Controllers
             }
         }
 
-        // POST api/booking/confirm
-        [HttpPost("confirm")]
-        public async Task<IActionResult> ConfirmBooking(Guid CustomerGuID)
-        {
-            try
-            {
-                await _bookingRepository.ConfirmBooking(CustomerGuID);
-                return Ok("Booking confirmed successfully!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Outer Exception: {ex}");
+     
 
-                // Extract and return the inner exception message if available
-                string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                return StatusCode(500, $"An error occurred while confirming booking: {errorMessage}");
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmBooking([FromBody] GuidRequest request)
+        {
+            if (Guid.TryParse(request.CustomerID, out Guid customerID))
+            {
+                try
+                {
+                    Console.WriteLine($"Received request to confirm booking for customerID: {customerID}");
+                    await _bookingRepository.ConfirmBooking(customerID);
+
+                    var response = new
+                    {
+                        Message = "Booking confirmed successfully!",
+                        Success = true
+                    };
+
+                    // Serialize the response object to JSON and return it
+                    return Ok(JsonSerializer.Serialize(response));
+
+                    //return Ok("Booking confirmed successfully!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Outer Exception: {ex}");
+
+                    // Extract and return the inner exception message if available
+                    string errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                    return StatusCode(500, $"An error occurred while confirming booking: {errorMessage}");
+                }
+            }
+            else
+            {
+                return BadRequest("Invalid CustomerID format.");
             }
         }
 
         [HttpPost("getBookingByCustomerID")]
-        public async Task<IActionResult> GetBookingByCustomerID(Guid customerID)
+        public async Task<IActionResult> GetBookingByCustomerID([FromBody] GetBookingByCustomerIDRequest request)
         {
-            try
+            if (Guid.TryParse(request.CustomerID, out Guid customerID))
             {
-                var bookingsByCustomerID = await _bookingRepository.GetBookingByCustomerID(customerID);
-                return Ok(bookingsByCustomerID);
+                try
+                {
+                    var bookingsByCustomerID = await _bookingRepository.GetBookingByCustomerID(customerID);
+                    return Ok(bookingsByCustomerID);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest($"Error: {ex.Message}");
+                return BadRequest("Invalid CustomerID format.");
             }
         }
+
 
 
 

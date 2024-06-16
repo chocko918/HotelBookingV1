@@ -41,7 +41,8 @@ export class LoginComponent {
       user => {
         this.errorMessage = '';
         // Handle successful login
-        this.cookieService.set('customerID', user.customerID);
+        this.cookieService.set('customerID', user.user.customerID);
+        console.log(user.user.customerID)
         console.log("Login successful, token: ", user);
         this.router.navigate(['/loginpage'], { state: { token: user.token, user: user.user } }); 
       },

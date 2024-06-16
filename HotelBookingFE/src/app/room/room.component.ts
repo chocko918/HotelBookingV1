@@ -27,5 +27,9 @@ export class RoomComponent implements OnInit {
     });
   }
 
+  getRoomImage(roomName: string): string {
+    return `assets/RoomImages/${roomName}.png`;
+  }
+
 }
 
