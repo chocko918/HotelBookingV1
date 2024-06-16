@@ -14,6 +14,7 @@ using HotelBooking2.Models;
 using FluentValidation.Internal;
 using HotelBooking2.Service;
 using System.Text.Json.Serialization;
+//using HotelBooking2.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -41,13 +42,15 @@ builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+//builder.Services.AddScoped<ICustomerIdMiddleware, CustomerIdMiddleware>();
 
 
-//builder.Services.AddControllers()
-//        .AddJsonOptions(options =>
-//        {
-//            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-//        });
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    //options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
+
 
 
 //Inside ConfigureServices method
