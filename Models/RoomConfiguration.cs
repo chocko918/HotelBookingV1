@@ -23,7 +23,7 @@ namespace HotelBooking2.Models
             );
 
             builder.HasData(
-                new Room { RoomID = 1003, Name = "Cactus", Pax = 3, Price = 220 }
+                new Room { RoomID = 1003, Name = "Sunflower", Pax = 3, Price = 220 }
             );
 
             builder.HasData(
@@ -40,7 +40,7 @@ namespace HotelBooking2.Models
             );
 
             builder.HasData(
-                new Room { RoomID = 2003, Name = "Dragonfruit", Pax = 3, Price = 220 }
+                new Room { RoomID = 2003, Name = "City", Pax = 3, Price = 220 }
             );
 
             builder.HasData(
@@ -57,11 +57,11 @@ namespace HotelBooking2.Models
             );
 
             builder.HasData(
-                new Room { RoomID = 3003, Name = "Porcupine", Pax = 3, Price = 220 }
+                new Room { RoomID = 3003, Name = "Piano", Pax = 3, Price = 220 }
             );
 
             builder.HasData(
-                new Room { RoomID = 3004, Name = "Seahorse", Pax = 4, Price = 300 }
+                new Room { RoomID = 3004, Name = "Nature", Pax = 4, Price = 300 }
             );
         }
     }
