@@ -1,4 +1,4 @@
-.error-message {
+/*.error-message {
   color: red;
   margin-top: 10px;
 }
@@ -19,6 +19,57 @@
   }
 
 .room-image {
-  width: 100px; /* Adjust the width as needed */
-  height: auto;
+  width: 100px;*/ /* Adjust the width as needed */
+  /*height: auto;
+}*/
+
+body {
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #4B3E2A;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+.hotel-title {
+  text-align: center;
+  font-size: 3em;
+  margin-top: 20px;
+  color: #4B3E2A;
+  font-weight: bold;
+}
+
+.hotel-quote {
+  text-align: center;
+  font-size: 1.5em;
+  color: #705D46;
+}
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #4B3E2A;
+}
+
+.btn-outline-dark {
+  color: #4B3E2A;
+  border-color: #4B3E2A;
+}
+
+  .btn-outline-dark:hover {
+    background-color: #4B3E2A;
+    color: #fff;
+  }
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(75, 62, 42, 0.1);
+}
+
+.table-dark {
+  background-color: #4B3E2A;
+  color: #fff;
+}
+

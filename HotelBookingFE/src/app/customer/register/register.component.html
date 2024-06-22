@@ -1,0 +1,48 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" type="email">
+    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+      <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input id="password" formControlName="password" type="password">
+    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+      <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+      <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="customerName">Name:</label>
+    <input id="customerName" formControlName="customerName" type="text">
+    <div *ngIf="registerForm.get('customerName')?.invalid && registerForm.get('customerName')?.touched">
+      <small *ngIf="registerForm.get('customerName')?.errors?.['required']">Name is required.</small>
+      <small *ngIf="registerForm.get('customerName')?.errors?.['pattern']">Name can only consist of alphabets.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="birthday">Birthday:</label>
+    <input id="birthday" formControlName="birthday" type="date" [max]="maxDate">
+    <div *ngIf="registerForm.get('birthday')?.invalid && registerForm.get('birthday')?.touched">
+      <small *ngIf="registerForm.get('birthday')?.errors?.['required']">Birthday is required.</small>
+      <small *ngIf="registerForm.get('birthday')?.errors?.['minAge']">
+        Must be at least {{ registerForm.get('birthday')?.errors?.['minAge'].requiredAge }} years old.
+      </small>
+    </div>
+  </div>
+
+  <div *ngIf="serverErrorMessages.length">
+    <ul>
+      <li *ngFor="let errorMessage of serverErrorMessages">{{ errorMessage }}</li>
+    </ul>
+  </div>
+
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>

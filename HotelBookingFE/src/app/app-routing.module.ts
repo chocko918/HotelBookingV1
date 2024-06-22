@@ -7,6 +7,7 @@ import { CustomerLoginPageComponent } from './customer/login/customer-login-page
 import { RoomComponent } from './room/room.component';
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
 import { CartComponent } from './cart/cart.component';
+import { RegisterComponent } from './customer/register/register.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'loginpage', component: CustomerLoginPageComponent },
   { path: 'room', component: RoomComponent },
   { path: 'roomAvailability', component: RoomAvailabilityComponent },
-  { path: 'cart', component: CartComponent},
+  { path: 'cart', component: CartComponent },
+  { path: 'register', component: RegisterComponent },
 
 ];
 

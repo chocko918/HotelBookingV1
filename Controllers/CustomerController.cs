@@ -7,6 +7,7 @@ using FluentValidation;
 using HotelBooking2.Helpers;
 using HotelBooking2.Service;
 using System.Security.Claims;
+using System.Globalization;
 
 namespace HotelBooking2.Controllers
 {
@@ -22,7 +23,7 @@ namespace HotelBooking2.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(CreateCustomerDTO customer)
+        public async Task<IActionResult> Register([FromBody]CreateCustomerDTO customer)
         {
             try
             {
