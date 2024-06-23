@@ -1,26 +1,79 @@
-<!-- login.component.html -->
+<link rel="stylesheet" href="../../../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
 
-<div class="login-container">
-  <h2>Login</h2>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" id="email" [(ngModel)]="email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" [(ngModel)]="password">
-  </div>
-  <button class="btn btn-primary" (click)="login()">Login</button>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-</div>
+<style>
+  .login-section {
+    /* Add the same background image as the home page */
+    background-image: url('../../../assets/img/Restful Hotel.png');
+    /* Add any additional styles to match the overlay and positioning */
+    position: relative;
+    z-index: 0;
+  }
 
-<!--<form (ngSubmit)="login()">
-  <input type="email" [(ngModel)]="email" name="email" placeholder="Email">
-  <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
-  <button type="submit">Login</button>
-  <button class="btn btn-primary" (click)="login()">Login</button>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-</form>-->
+  .login-container {
+    /* Adjust container styles */
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
+
+    .login-container .heading {
+      /* Adjust heading styles */
+      color: #333; /* Match the color with the home page */
+      margin-bottom: 20px;
+    }
+
+    .login-section {
+
+        padding-top: 150px;
+    }
+</style>
+
+<body>
+  <section class="site-hero overlay login-section" style="background-image: url('../../../assets/img/Restful Hotel.png')">
+    <!--<section style="background-color: #6c757d; background-image: url('../assets/img/Restful Hotel.png')" >-->
+    <div class="container">
+      <div class="login-container justify-content-center align-items-center">
+        <h2 class="heading " data-aos="fade-up">Login</h2>
+        <div class="form-group" data-aos="fade-up">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="email">
+        </div>
+        <div class="form-group" data-aos="fade-up">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" [(ngModel)]="password">
+        </div>
+        <div *ngIf="errorMessage" class="error-message" data-aos="fade-in">{{ errorMessage }}</div>
+        <button class="btn btn-primary btn-block" data-aos="fade-up" (click)="login()">Login</button>
+      </div>
+    </div>
+  </section>
+
+</body>
 
 
-<!--<router-outlet></router-outlet>-->
+
+<!--/*.login-container label {*/
+  /* Adjust label styles */
+  /*color: #333;*/ /* Match the color with the home page */
+/*}
+
+.login-container .form-control {*/
+  /* Adjust input styles */
+  /*border-color: #333;*/ /* Match the color with the home page */
+/*}
+
+.login-container .btn-primary {*/
+  /* Adjust button styles */
+  /*background-color: #333;*/ /* Match the color with the home page */
+  /*border-color: #333;*/ /* Match the color with the home page */
+/*}
+
+.login-container .btn-primary:hover {*/
+  /* Adjust button hover styles */
+  /*background-color: #555;*/ /* Darken the color on hover */
+  /*border-color: #555;*/ /* Darken the color on hover */
+/*}*/-->

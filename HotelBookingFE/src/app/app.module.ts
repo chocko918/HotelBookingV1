@@ -17,6 +17,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerLoginPageComponent } from './customer/login/customer-login-page/customer-login-page.component';
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
 import { CartComponent } from './cart/cart.component';
+import { RegisterComponent } from './customer/register/register.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { CartComponent } from './cart/cart.component';
     CustomerLoginPageComponent,
     RoomAvailabilityComponent,
     CartComponent,
+    RegisterComponent,
 
   ],
   imports: [
@@ -43,6 +45,7 @@ import { CartComponent } from './cart/cart.component';
   providers: [
     ServicesService,
     CookieService,
+
   ],
    
   bootstrap: [AppComponent]

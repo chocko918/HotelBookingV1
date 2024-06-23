@@ -3,8 +3,8 @@ import { ServicesService } from '../services.service';
 
 @Component({
   selector: 'app-room',
-  templateUrl: './room.component.html',
-  styleUrls: ['./room.component.css']
+  templateUrl: './room.component.html', 
+  styleUrls: ['../../styles.css']
 })
 
 export class RoomComponent implements OnInit {

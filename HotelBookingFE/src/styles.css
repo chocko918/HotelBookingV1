@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/*body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #4B3E2A;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-section {
+  background: linear-gradient(to bottom, goldenrod, transparent);
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+.hotel-title {
+  font-size: 3em;
+  margin-top: 20px;
+  color: #4B3E2A;
+  font-weight: bold;
+}
+
+.hotel-quote {
+  font-size: 1.5em;
+  color: #705D46;
+}
+
+.transparent-navbar {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #4B3E2A;
+}
+
+.btn-outline-dark {
+  color: #4B3E2A;
+  border-color: #4B3E2A;
+}
+
+  .btn-outline-dark:hover {
+    background-color: #4B3E2A;
+    color: #fff;
+  }
+
+body::after {
+  content: "";
+  background: url('Restful Hotel.png') no-repeat center center;
+  background-size: cover;*/ /* Adjust to 'contain' or 'cover' as needed */
+  /*background-attachment: fixed;
+  position: absolute;
+  top: 50px;*/ /* Start from the top of the body */
+  /*left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(75, 62, 42, 0.1);
+}
+
+.table-dark {
+  background-color: #4B3E2A;
+  color: #fff;
+}
+
+.table-translucent {
+  background-color: rgb(255, 0, 0, 1);
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}*/

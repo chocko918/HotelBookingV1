@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'roomAvailability', component: RoomAvailabilityComponent },
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/room', pathMatch: 'full' }, // Redirect to room component by default
 
 ];
 

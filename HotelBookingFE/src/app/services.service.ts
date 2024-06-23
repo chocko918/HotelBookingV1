@@ -4,8 +4,7 @@ import { HttpClient, HttpErrorResponse,HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
 import { CartResponse } from './cart/cart.model';
-import { CookieService } from 'ngx-cookie-service';
-import { v4 as uuidv4 } from 'uuid';
+import { CreateCustomerDTO } from './customer/register/register.model';
 
 
 @Injectable({
@@ -88,13 +87,6 @@ export class ServicesService {
     return this.https.delete(this.APIUrl + '/DeleteCartItem', { params: { itemID } });
   }
 
-  //confirmCartItem(customerID: string): Observable<any> {
-  //  console.log('Request URL:', `${this.APIUrl}/confirm`, customerID);
-  //  return this.https.post<any>(`${this.APIUrl}/confirm`, {customerID })
-  //      .pipe(
-  //        catchError(this.handleError)
-  //      );
-  //}
 
   
   confirmCartItem(customerID: string): Observable<any> {
@@ -112,7 +104,44 @@ export class ServicesService {
     );
   }
 
-  
+
+
+  //register(customer: CreateCustomerDTO): Observable<any> {
+  //  console.log(customer.birthday)
+  //  console.log(customer)
+  //  //customer.birthday = new Date(customer.birthday).toISOString().split('T')[0];
+  //  console.log(this.https.post<any>(`${this.APIUrl}/register`, { customer } ));
+  //  return this.https.post<any>(`${this.APIUrl}/register`,  customer ).pipe(
+  //    catchError(this.handleError)
+  //  );
+  //}
+
+  //register(customer: CreateCustomerDTO): Observable<any> {
+  //  const formatDate = (date: Date): string => {
+  //    const year = date.getFullYear();
+  //    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  //    const day = date.getDate().toString().padStart(2, '0');
+  //    return `${year}-${month}-${day}T00:00:00`;
+  //  };
+
+  //  const formattedCustomer = {
+  //    ...customer,
+  //    birthday: formatDate(new Date(customer.birthday))
+  //  };
+
+  //  console.log(formattedCustomer);
+
+  //  return this.https.post<any>(`${this.APIUrl}/register`, formattedCustomer).pipe(
+  //    catchError(this.handleError)
+  //  );
+  //}
+
+  register(customer: CreateCustomerDTO): Observable<any> {
+    console.log(customer)
+    return this.https.post<any>(`${this.APIUrl}/register`, customer).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';

@@ -95,7 +95,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/styles.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/owl.carousel.min.css",
+              "src/assets/css/aos.css",
+              "src/assets/fonts/ionicons/css/ionicons.min.css",
+              "src/assets/fonts/fontawesome/css/font-awesome.min.css",
+              "src/assets/css/style.css"
             ],
             "scripts": []
           }
