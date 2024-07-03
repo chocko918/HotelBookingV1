@@ -152,7 +152,9 @@ namespace HotelBooking2.Repositories
                     await _context.SaveChangesAsync();
 
                     // Clear the cart after successful booking (uncomment if needed)
-                    // await _context.ClearCartAsync();
+                    var allCartItems = await _context.Carts.ToListAsync();
+                    _context.Carts.RemoveRange(allCartItems);
+                    await _context.SaveChangesAsync();
 
                     // Commit the transaction
                     await transaction.CommitAsync();

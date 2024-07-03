@@ -66,24 +66,6 @@ namespace HotelBooking2.Controllers
         }
 
 
-        //[HttpPost("login")]
-        //public async Task<IActionResult> Login(string email, string password)
-        //{
-        //    try
-        //    {
-        //        var customer = await _customerRepository.GetCustomerByEmailAndPassword(email, password);
-        //        if (customer == null)
-        //        {
-        //            return BadRequest("Invalid email or password");
-        //        }
-
-        //        return Ok(customer);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest($"Error: {ex.Message}");
-        //    }
-        //}
 
         [HttpGet("customer")]
         public async Task<IActionResult> GetAllCustomers()
@@ -141,6 +123,16 @@ namespace HotelBooking2.Controllers
             {
                 return BadRequest($"Error: {ex.Message}");
             }
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            // If you have server-side cleanup or token invalidation logic, add it here.
+            // For example, if you are logging the logout action:
+            // await _logService.LogLogoutAsync(User.Identity.Name);
+
+            return await Task.FromResult(Ok(new { message = "Logged out successfully" }));
         }
     }
 

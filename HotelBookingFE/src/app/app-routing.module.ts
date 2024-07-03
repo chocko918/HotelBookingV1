@@ -8,6 +8,8 @@ import { RoomComponent } from './room/room.component';
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
 import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './customer/register/register.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BookinginfoComponent } from './customer/bookinginfo/bookinginfo.component';
 
 
 const routes: Routes = [
@@ -20,7 +22,8 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: '/room', pathMatch: 'full' }, // Redirect to room component by default
-
+  { path: 'navbar', component: NavbarComponent },
+  { path: 'bookingInfo', component: BookinginfoComponent },
 ];
 
 @NgModule({

@@ -1,8 +1,15 @@
 <!doctype html>
 <html lang="en">
-<body>
+<head>
+
   <link rel="stylesheet" href="../assets/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/animate.css">
+  <link rel="stylesheet" href="../assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../assets/css/aos.css">
+  <link rel="stylesheet" href="../assets/fonts/ionicons/css/ionicons.min.css">
+  <link rel="s" type="image/x-icon" href="favicon.ico">
+
 
 
   <script>
@@ -12,19 +19,76 @@
         welcomeSection.style.display = "none";
       }
     }
+
   </script>
 
+  <style>
+    .footer-section {
+      margin-top: 0px;
+    }
+  </style>
+</head>
 
-  <!--<section class="site-hero overlay" style="background-image: url('../assets/img/Restful Hotel.png')">-->
 
-  <!--</section>-->
+  <!--<header class="site-header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4 site-logo" data-aos="fade"><a href="http://localhost:1111"><em>Restful Hotel</em></a></div>
+        <div class="col-8">
 
+
+          <div data-aos="fade" class="site-menu-toggle js-site-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="site-navbar js-site-navbar">
+            <nav role="navigation">
+              <div class="container">
+                <div class="row full-height align-items-center">
+                  <div class="col-md-6">
+                    <ul class="list-unstyled menu">
+                      <li class="active"><a href="http://localhost:1111">Home</a></li>
+                      <li class="scroll-to-section"><a href="http://localhost:1111/room">Rooms</a></li>
+                      <li><a href="contact.html">Account</a></li>
+                      <li><a href="blog.html">Reservation</a></li>
+                      <li><a href="blog.html">Your Bookings</a></li>
+                      <li><a href="blog.html">Log Out</a></li>
+                    </ul>
+                  </div>
+
+                  <div class="col-md-6 extra-info">
+                    <div class="row">
+                      <div class="col-md-6 mb-5">
+
+                      </div>
+                      <div class="col-md-6 mb-5">
+                        <h3>Contact Info</h3>
+                        <p>98 West 21th Street, Suite 721 <br> New York NY 10016</p>
+                        <p>infoAFSDFourdomain.com</p>
+                        <p>(+1) 435 3533</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>-->
+
+<app-navbar></app-navbar>
+<body>
   <router-outlet></router-outlet>
+
 
   <footer class="section footer-section">
     <div class="container">
       <div class="row mb-4">
-        <div class="col-md-3 mb-5">
+        <!--<div class="col-md-3 mb-5">
           <ul class="list-unstyled link">
             <li><a href="#">About Us</a></li>
             <li><a href="#">Terms &amp; Conditions</a></li>
@@ -41,13 +105,13 @@
             <li><a href="#">Contact</a></li>
             <li><a href="#">Restaurant</a></li>
           </ul>
-        </div>
+        </div>-->
         <div class="col-md-3 mb-5 pr-md-5 contact-info">
           <p><span class="d-block">Address:</span> <span> 98 West 21th Street, Suite 721 New York NY 10016</span></p>
           <p><span class="d-block">Phone:</span> <span> (+1) 435 3533</span></p>
           <p><span class="d-block">Email:</span> <span> infoourdomain.com</span></p>
         </div>
-        <div class="col-md-3 mb-5">
+        <!--<div class="col-md-3 mb-5">
           <p>Sign up for our newsletter</p>
           <form action="#" class="footer-newsletter">
             <div class="form-group">
@@ -55,7 +119,7 @@
               <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
             </div>
           </form>
-        </div>
+        </div>-->
       </div>
       <div class="row bordertop pt-5">
         <p class="col-md-6 text-left">
@@ -73,7 +137,13 @@
       </div>
     </div>
   </footer>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../assets/js/popper.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/owl.carousel.min.js"></script>
+  <script src="../assets/js/jquery.waypoints.min.js"></script>
+  <script src="../assets/js/aos.js"></script>
+  <script src="../assets/js/main.js"></script>
 </body>
 </html>
 

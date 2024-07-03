@@ -1,48 +1,95 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email:</label>
-    <input id="email" formControlName="email" type="email">
-    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-      <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
-      <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</small>
+<link rel="stylesheet" href="../../../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+
+<style>
+  .login-section {
+    background-image: url('../../../assets/img/Restful Hotel.png');
+    position: relative;
+    z-index: 0;
+    padding-top: 150px;
+  }
+
+  .login-container {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .login-container .heading {
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+
+  .success-message {
+    color: green;
+    margin-top: 10px;
+  }
+</style>
+
+<body>
+  <section class="site-hero overlay login-section" style="background-image: url('../../../assets/img/Restful Hotel.png')">
+    <div class="container">
+      <div class="login-container justify-content-center align-items-center">
+        <h2 class="heading" data-aos="fade-up">Register</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" data-aos="fade-up">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+            <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message" data-aos="fade-in">
+              <small *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</small>
+              <small *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email address.</small>
+            </div>
+          </div>
+          <div class="form-group" data-aos="fade-up">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+            <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message" data-aos="fade-in">
+              <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
+              <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
+            </div>
+          </div>
+          <div class="form-group" data-aos="fade-up">
+            <label for="customerName">Name</label>
+            <input type="text" class="form-control" id="customerName" formControlName="customerName">
+            <div *ngIf="registerForm.get('customerName')?.invalid && registerForm.get('customerName')?.touched" class="error-message" data-aos="fade-in">
+              <small *ngIf="registerForm.get('customerName')?.errors?.['required']">Name is required.</small>
+              <small *ngIf="registerForm.get('customerName')?.errors?.['pattern']">Name can only consist of alphabets.</small>
+            </div>
+          </div>
+          <div class="form-group" data-aos="fade-up">
+            <label for="birthday">Birthday</label>
+            <input type="date" class="form-control" id="birthday" formControlName="birthday" [max]="maxDate">
+            <div *ngIf="registerForm.get('birthday')?.invalid && registerForm.get('birthday')?.touched" class="error-message" data-aos="fade-in">
+              <small *ngIf="registerForm.get('birthday')?.errors?.['required']">Birthday is required.</small>
+              <small *ngIf="registerForm.get('birthday')?.errors?.['minAge']">
+                Must be at least {{ registerForm.get('birthday')?.errors?.['minAge'].requiredAge }} years old.
+              </small>
+            </div>
+          </div>
+          <div *ngIf="serverErrorMessages.length" data-aos="fade-up" class="error-message">
+            <ul>
+              <li *ngFor="let errorMessage of serverErrorMessages">{{ errorMessage }}</li>
+            </ul>
+          </div>
+          <div *ngIf="successMessages" data-aos="fade-up" class="error-message">
+            <ul>
+              <li class="success-message">{{ successMessages }}</li>
+            </ul>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid" data-aos="fade-up">Register</button>
+        </form>
+      </div>
     </div>
-  </div>
+  </section>
+</body>
 
-  <div>
-    <label for="password">Password:</label>
-    <input id="password" formControlName="password" type="password">
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-      <small *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</small>
-      <small *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters long.</small>
-    </div>
-  </div>
-
-  <div>
-    <label for="customerName">Name:</label>
-    <input id="customerName" formControlName="customerName" type="text">
-    <div *ngIf="registerForm.get('customerName')?.invalid && registerForm.get('customerName')?.touched">
-      <small *ngIf="registerForm.get('customerName')?.errors?.['required']">Name is required.</small>
-      <small *ngIf="registerForm.get('customerName')?.errors?.['pattern']">Name can only consist of alphabets.</small>
-    </div>
-  </div>
-
-  <div>
-    <label for="birthday">Birthday:</label>
-    <input id="birthday" formControlName="birthday" type="date" [max]="maxDate">
-    <div *ngIf="registerForm.get('birthday')?.invalid && registerForm.get('birthday')?.touched">
-      <small *ngIf="registerForm.get('birthday')?.errors?.['required']">Birthday is required.</small>
-      <small *ngIf="registerForm.get('birthday')?.errors?.['minAge']">
-        Must be at least {{ registerForm.get('birthday')?.errors?.['minAge'].requiredAge }} years old.
-      </small>
-    </div>
-  </div>
-
-  <div *ngIf="serverErrorMessages.length">
-    <ul>
-      <li *ngFor="let errorMessage of serverErrorMessages">{{ errorMessage }}</li>
-    </ul>
-  </div>
-
-
-  <button type="submit" [disabled]="registerForm.invalid">Register</button>
-</form>

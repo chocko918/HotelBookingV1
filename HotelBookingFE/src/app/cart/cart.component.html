@@ -1,44 +1,92 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Item ID</th>
-      <th>Room ID</th>
-      <th>Room</th>
-      <th style="text-align: right;">Price</th>
-      <th>CheckInDate</th>
-      <th>CheckOutDate</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cart of CartList">
-      <td>{{ cart.itemID }}</td>
-      <td>{{ cart.roomID }}</td>
-      <td>{{ cart.name }}</td>
-      <td style="text-align: right;">{{ cart.price }}</td>
-      <td>{{ cart.checkInDate }}</td>
-      <td>{{ cart.checkOutDate }}</td>
-      <td>
-        <button (click)="deleteCartItem(cart.itemID)" class="btn btn-danger">Delete</button>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3"></td>
-      <td style="text-align: right;">Total Price: {{ TotalPrice }}</td>
-      <td colspan="3"></td>
-    </tr>
-  </tbody>
-</table>
+<link rel="stylesheet" href="../../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<style>
+  .cart-section {
+    padding-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-<button (click)="confirmCartItem()" class="btn btn-primary">Confirm Booking</button>
+  .cart-container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    border-radius: 8px;
+  }
 
+  .heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-<button (click)="getBookingsByCustomer()" class="btn btn-primary">Get bookings by customerID</button>
+  .logout-button {
+    margin-left: auto;
+  }
 
-<!-- Display Confirmed Bookings -->
-<!--<div *ngIf="confirmedBookings">
-  <h3>Confirmed Bookings:</h3>
-  <ul>
-    <li *ngFor="let booking of confirmedBookings">{{ booking }}</li>
-  </ul>
-</div>-->
+  .notice {
+    margin-top: 20px;
+    color: green;
+  }
+
+  .error-message {
+    color: red;
+  }
+
+  .room-image {
+    width: 100px;
+    height: auto;
+  }
+
+  /* Center align table rows */
+  .room-table th,
+  .room-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .total-price-row td {
+    text-align: right;
+  }
+</style>
+
+<section id="cart-section" class="cart-section section bg-pattern">
+  <div class="cart-container">
+    <div class="heading-container">
+      <h2>Your Cart</h2>
+    </div>
+
+    <table class="table table-striped mt-4 room-table">
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Image</th>
+          <th>Check-In Date</th>
+          <th>Check-Out Date</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cart of CartList">
+          <td>{{ cart.name }}</td>
+          <td><img [src]="getRoomImage(cart.name)" alt="{{ cart.name }}" class="room-image img-fluid" /></td>
+          <td>{{ cart.checkInDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ cart.checkOutDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ cart.price }}</td>
+          <td>
+            <button (click)="deleteCartItem(cart.itemID)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+        <tr class="total-price-row">
+          <td colspan="4">Total Price ($):</td>
+          <td>{{ TotalPrice }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="confirmCartItem()" class="btn btn-primary mt-3">Confirm Booking</button>
+    <p *ngIf="cartItemConfirmed" class="notice">Booking is done for all items in cart!</p>
+  </div>
+</section>

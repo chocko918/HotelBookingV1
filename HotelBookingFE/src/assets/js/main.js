@@ -2,16 +2,19 @@
 
 	'use strict';
 
-  $('.site-menu-toggle').click(function(){
+  $('.site-menu-toggle').click(function () {
+    alert('Hello, please!');
     var $this = $(this);
     if ( $('body').hasClass('menu-open') ) {
       $this.removeClass('open');
       $('.js-site-navbar').fadeOut(400);
       $('body').removeClass('menu-open');
+
     } else {
       $this.addClass('open');
       $('.js-site-navbar').fadeIn(400);
       $('body').addClass('menu-open');
+
     }
   });
 

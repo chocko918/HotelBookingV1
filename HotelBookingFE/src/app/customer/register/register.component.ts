@@ -15,8 +15,9 @@ export class RegisterComponent {
   registerForm: FormGroup;
   maxDate: string;
   serverErrorMessages: string[] = [];
+  successMessages: string;
 
-  constructor(private fb: FormBuilder, private authService: ServicesService) {
+  constructor(private fb: FormBuilder, private authService: ServicesService, private router: Router) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -24,6 +25,7 @@ export class RegisterComponent {
       birthday: ['', [Validators.required, this.minimumAgeValidator(18)]]
     });
     this.maxDate = this.calculateMaxDate();
+    this.successMessages = "";
   }
 
   calculateMaxDate(): string {
@@ -56,7 +58,22 @@ export class RegisterComponent {
       this.authService.register(formValue).subscribe(
         (response: any) => {
           console.log('Registration successful', response);
+          this.successMessages = "Registration successful! Please log in to reserve a room.";
           this.serverErrorMessages = [];
+          // Countdown timer
+          let countdown = 5;
+          const interval = setInterval(() => {
+            countdown--;
+            this.successMessages = `Registration successful! You will be redirected to the login page in ${countdown} seconds.`;
+            if (countdown === 0) {
+              clearInterval(interval);
+            }
+          }, 2000);
+
+          // Delay navigation by 3 seconds
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 5000);
         },
         (error: any) => {
           if (error.status === 400 && error.error && error.error.errors) {

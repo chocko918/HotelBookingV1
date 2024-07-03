@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../services.service';
 import { DatePipe } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
+import { CartResponse, CartItem } from '../../cart/cart.model'
+import { SharedService } from '../../shared.service'
 @Component({
   selector: 'app-room-availability',
   templateUrl: './room-availability.component.html',
   styleUrls: ['./room-availability.component.css']
 })
-export class RoomAvailabilityComponent {
+export class RoomAvailabilityComponent implements OnInit {
   pax!: number;
   checkInDate!: Date;
   checkOutDate!: Date;
@@ -16,10 +18,12 @@ export class RoomAvailabilityComponent {
   maxDate!: string;
   errorMessage: string = "";
   roomID!: number;
+  itemAddedToCart: boolean = false;
 
   availableRooms: any = [];
 
-  constructor(private service: ServicesService, private router: Router) { }
+
+  constructor(private sharedService: SharedService, private service: ServicesService, private router: Router, private cookieService: CookieService) { }
 
   ngOnInit() {
     const currentDate = new Date();
@@ -38,6 +42,7 @@ export class RoomAvailabilityComponent {
       data => {
         this.availableRooms = data;
         this.errorMessage = '';
+        this.sharedService.triggerRefreshCartList();
         console.log('Available rooms:', this.availableRooms);
         //this.router.navigate(['/available-rooms'], { state: { pax: data.pax, checkInDate: data.checkInDate, checkOutDate: data.checkOutDate } });
       },
@@ -61,6 +66,11 @@ export class RoomAvailabilityComponent {
         data => {
           console.log('Room added to cart:', data);
           this.errorMessage = '';
+          this.checkAvailability();
+          this.itemAddedToCart = true;
+          setTimeout(() => {
+            this.itemAddedToCart = false;
+          }, 3000); // Notice will disappear after 3 seconds
         },
         error => {
           console.log(room.roomID, this.checkInDate, this.checkOutDate)
@@ -72,8 +82,38 @@ export class RoomAvailabilityComponent {
     });
   }
 
+
+
   getRoomImage(roomName: string): string {
     return `assets/RoomImages/${roomName}.png`;
   }
 
+  onLogout() {
+    this.service.logout().subscribe(
+      () => {
+        // Clear the JWT token from localStorage
+        this.cookieService.delete('customerID');
+        this.service.deleteAllCartItems().subscribe(
+          () => {
+            // Clear the JWT token from localStorage
+            console.log("all cart items deleted")
+
+          },
+         error => {
+            console.error('Logout error', error);
+          }
+        )
+        // Redirect to the login page
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.error('Logout error', error);
+      }
+    );
+  }
+
+ 
+  deleteAll() { 
+  this.service.deleteAllCartItems();
+  }
 }

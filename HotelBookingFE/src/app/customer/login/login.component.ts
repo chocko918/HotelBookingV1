@@ -42,9 +42,15 @@ export class LoginComponent {
         this.errorMessage = '';
         // Handle successful login
         this.cookieService.set('customerID', user.user.customerID);
+        this.cookieService.set('token', user.token);
+        this.cookieService.set('user', user.user);
+        this.cookieService.set('email', user.user.email);
+        this.cookieService.set('customerName', user.user.customerName);
+        this.cookieService.set('birthday', user.user.birthday);
         console.log(user.user.customerID)
-        console.log("Login successful, token: ", user);
-        this.router.navigate(['/loginpage'], { state: { token: user.token, user: user.user } }); 
+        console.log("Login successful, token: ", user.user);
+        this.router.navigate(['/loginpage']);
+        //this.router.navigate(['/loginpage'], { state: { token: user.token, user: user.user } }); 
       },
       error => {
         // Handle login error
@@ -53,6 +59,22 @@ export class LoginComponent {
       }
     );
 
+  }
+
+  onLogout() {
+    this.authService.logout().subscribe(
+      () => {
+        // Clear the JWT token from localStorage
+        this.cookieService.delete('customerID');
+        this.authService.deleteAllCartItems();
+        // Redirect to the login page
+        this.router.navigate(['/login']);
+        this.authService.deleteAllCartItems();
+      },
+      error => {
+        console.error('Logout error', error);
+      }
+    );
   }
 }
 

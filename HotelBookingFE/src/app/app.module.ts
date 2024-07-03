@@ -10,6 +10,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { RoomComponent } from './room/room.component';
 import { LoginComponent } from './customer/login/login.component';
 import { ServicesService } from './services.service';
+import { SharedService } from './shared.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,6 +19,8 @@ import { CustomerLoginPageComponent } from './customer/login/customer-login-page
 import { RoomAvailabilityComponent } from './room/room-availability/room-availability.component';
 import { CartComponent } from './cart/cart.component';
 import { RegisterComponent } from './customer/register/register.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BookinginfoComponent } from './customer/bookinginfo/bookinginfo.component';
 
 
 @NgModule({
@@ -30,6 +33,8 @@ import { RegisterComponent } from './customer/register/register.component';
     RoomAvailabilityComponent,
     CartComponent,
     RegisterComponent,
+    NavbarComponent,
+    BookinginfoComponent,
 
   ],
   imports: [
@@ -45,6 +50,7 @@ import { RegisterComponent } from './customer/register/register.component';
   providers: [
     ServicesService,
     CookieService,
+    SharedService,
 
   ],
    

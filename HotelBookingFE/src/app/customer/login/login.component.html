@@ -20,19 +20,19 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   }
 
-    .login-container .heading {
-      /* Adjust heading styles */
-      color: #333; /* Match the color with the home page */
-      margin-bottom: 20px;
-    }
+  .login-container .heading {
+    /* Adjust heading styles */
+    color: #333; /* Match the color with the home page */
+    margin-bottom: 20px;
+  }
 
-    .login-section {
-
-        padding-top: 150px;
-    }
+  .login-section {
+    padding-top: 150px;
+  }
 </style>
-
+<app-navbar></app-navbar>
 <body>
+
   <section class="site-hero overlay login-section" style="background-image: url('../../../assets/img/Restful Hotel.png')">
     <!--<section style="background-color: #6c757d; background-image: url('../assets/img/Restful Hotel.png')" >-->
     <div class="container">
@@ -48,6 +48,7 @@
         </div>
         <div *ngIf="errorMessage" class="error-message" data-aos="fade-in">{{ errorMessage }}</div>
         <button class="btn btn-primary btn-block" data-aos="fade-up" (click)="login()">Login</button>
+        <button routerLink="../register" class="btn btn-primary btn-block" data-aos="fade-up" >Register</button>
       </div>
     </div>
   </section>

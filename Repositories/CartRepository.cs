@@ -18,6 +18,43 @@ namespace HotelBooking2.Repositories
             return await _context.Carts.ToListAsync();
         }
 
+        //public async Task<Cart> AddItemToCartAsync(int roomId, DateTime checkInDate, DateTime checkOutDate)
+        //{
+        //    // Ensure that only the date part is considered
+        //    checkInDate = checkInDate.Date;
+        //    checkOutDate = checkOutDate.Date;
+        //    // Check if item already exists in cart
+        //    var existingCartItem = await _context.Carts.FirstOrDefaultAsync(c =>
+        //        c.RoomID == roomId &&
+        //        ((c.CheckInDate.Date >= checkInDate && c.CheckInDate.Date < checkOutDate) ||
+        //        (c.CheckOutDate.Date > checkInDate && c.CheckOutDate.Date <= checkOutDate)));
+
+        //    if (existingCartItem != null)
+        //    {
+        //        throw new Exception("Item already exists in cart.");
+        //    }
+
+        //    var room = await _context.Rooms.FirstOrDefaultAsync(c => c.RoomID == roomId);
+        //    if (room == null)
+        //    {
+        //        throw new Exception("Room not found.");
+        //    }
+        //    var newItem = new Cart
+        //    {
+        //        ItemID = Guid.NewGuid(),
+        //        RoomID = roomId,
+        //        Name = room.Name,
+        //        Price = room.Price,
+        //        CheckInDate = checkInDate,
+        //        CheckOutDate = checkOutDate,
+        //    };
+
+        //    await _context.Carts.AddAsync(newItem);
+        //    await _context.SaveChangesAsync();
+
+        //    return newItem;
+        //}
+
         public async Task<Cart> AddItemToCartAsync(int roomId, DateTime checkInDate, DateTime checkOutDate)
         {
             // Ensure that only the date part is considered

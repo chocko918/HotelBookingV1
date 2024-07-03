@@ -1,4 +1,5 @@
 ﻿using HotelBooking2.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBooking2.Repositories
 {
@@ -12,6 +13,7 @@ namespace HotelBooking2.Repositories
         Task<List<Customer>> GetAllCustomers();
         Task DeleteCustomer(string email, string password);
         Task UpdateCustomer(Customer existingCustomer, UpdateCustomerDTO updatedCustomerDto);
+
 
 
     }

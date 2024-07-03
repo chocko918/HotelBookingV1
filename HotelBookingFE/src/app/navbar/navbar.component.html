@@ -1,0 +1,161 @@
+
+<head>
+
+  <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <link rel="stylesheet" href="../../assets/css/animate.css">
+  <link rel="stylesheet" href="../../assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../../assets/css/aos.css">
+  <link rel="stylesheet" href="../../assets/fonts/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../../assets/fonts/fontawesome/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400|Playfair+Display:400,700" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/owl.carousel.min.js"></script>
+  <script src="../../assets/js/jquery.waypoints.min.js"></script>
+  <script src="../../assets/js/aos.js"></script>
+
+  <script>
+    function hideSection() {
+      var welcomeSection = document.getElementById("login");
+      if (welcomeSection) {
+        welcomeSection.style.display = "none";
+      }
+    }</script>
+</head>
+<body>
+  <style>
+    .dropdown-toggle::after {
+      display: none; /* Hide the default dropdown arrow */
+    }
+
+    .hamburger-icon {
+      display: inline-block;
+      cursor: pointer;
+    }
+
+      .hamburger-icon span {
+        display: block;
+        width: 20px; /* Adjust size as needed */
+        height: 2px; /* Adjust thickness as needed */
+        background-color: #000; /* Adjust color as needed */
+        margin: 4px 0; /* Adjust spacing as needed */
+      }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.5); /* Transparent whitish background */
+      border: none; /* Remove border */
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque on hover */
+    }
+
+    .site-logo a {
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Greyish shadow */
+      color: rgb(60, 55, 55) /* Text color */
+      font-size: 3m; /* Adjust font size as needed */
+      text-decoration: none; /* Remove underline */
+    }
+  </style>
+
+
+
+
+  <header class="site-header">
+
+    <div class="row">
+      <div class="col-4 site-logo" data-aos="fade">
+        <!--<a href="http://localhost:1111"><em>Restful Hotel</em></a>-->
+        <a><em>Restful Hotel</em></a>
+      </div>
+      <div class="col-8 text-right" data-aos="fade">
+        <div class="dropdown" *ngIf="isLoggedIn">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <!-- Hamburger icon -->
+            <div class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/home">Home</a>
+            <a class="dropdown-item" routerLink="../loginpage">Account</a>
+            <a class="dropdown-item" routerLink="../bookingInfo">Booking</a>
+            <a class="dropdown-item" routerLink="../roomAvailability">New Booking</a>
+            <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+          </div>
+        </div>
+        <!--<div *ngIf="!isLoggedIn">
+          <a href="/login" class="btn btn-secondary">Login</a>
+        </div>-->
+      </div>
+    </div>
+
+  </header>
+
+
+  <script src="../../assets/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/owl.carousel.min.js"></script>
+  <script src="../../assets/js/jquery.waypoints.min.js"></script>
+  <script src="../../assets/js/aos.js"></script>
+</body>
+
+
+
+<!--<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 site-logo" data-aos="fade">
+      <a href="http://localhost:1111"><em>Restful Hotel</em></a>
+    </div>
+    <div class="col-8">
+      <div class="js-site-menu-toggle site-menu-toggle" data-aos="fade">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="site-navbar js-site-navbar">
+        <nav role="navigation">
+          <div class="container">
+            <div class="row full-height align-items-center">
+              <div class="col-md-6">
+                <ul class="list-unstyled menu">
+                  <li class="active"><a href="http://localhost:1111">Home</a></li>
+                  <li class="scroll-to-section"><a href="http://localhost:1111/room">Rooms</a></li>
+                  <li><a href="contact.html">Account</a></li>
+                  <li><a href="blog.html">Reservation</a></li>
+                  <li><a href="blog.html">Your Bookings</a></li>
+                  <li><a href="blog.html">Log Out</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 extra-info">
+                <div class="row">
+                  <div class="col-md-6 mb-5">
+                    <h3>Contact Info</h3>
+                    <p>98 West 21th Street, Suite 721 <br> New York NY 10016</p>
+                    <p>infoadfrdomain.com</p>
+                    <p>(+1) 435 3533</p>
+                  </div>
+                  <div class="col-md-6 mb-5">
+                    <h3>Contact Info</h3>
+                    <p>98 West 21th Street, Suite 721 <br> New York NY 10016</p>
+                    <p>infadfrdomain.com</p>
+                    <p>(+1) 435 3533</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>-->

@@ -59,6 +59,19 @@ namespace HotelBooking2.Controllers
             }
         }
 
+        [HttpDelete("DeleteAllCartItem")]
+        public async Task<IActionResult> DeleteAllCartItems()
+        {
+            try
+            {
+                await _cartRepository.DeleteAllCartItems();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Error: {ex.Message}");
+            }
+        }
 
     }
 }

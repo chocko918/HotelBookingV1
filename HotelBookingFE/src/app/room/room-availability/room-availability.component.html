@@ -1,54 +1,156 @@
-<div>
-  <label for="pax">Number of Guests:</label>
-  <input type="number" id="pax" [(ngModel)]="pax" name="pax" min="1" max="4" required #paxField="ngModel" />
-  <div *ngIf="paxField.invalid && (paxField.dirty || paxField.touched)" class="error-message">
-    <div *ngIf="paxField.errors?.['required']">Number of guests is required.</div>
-    <div *ngIf="paxField.errors?.['min']">Number of guests must be at least 1.</div>
-    <div *ngIf="paxField.errors?.['max']">Number of guests cannot exceed 4.</div>
+<link rel="stylesheet" href="../../../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
+<style>
+  .availability-section {
+    padding-top: 150px;
+  }
+
+  .heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logout-button {
+    margin-left: auto;
+  }
+
+  .room-image {
+    width: 200px;
+    height: auto;
+  }
+
+  .custom-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    padding: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+  }
+
+  /* Checked state styles */
+  .custom-checkbox:checked {
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none;
+  }
+
+  /* Checkmark styles */
+  .custom-checkbox:checked::before {
+    content: '\2714';
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+
+  /* Add transition for smooth effect */
+  .custom-checkbox {
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  /* Error message styles */
+  .error-message {
+    color: red;
+  }
+
+  /* Center align table rows */
+  .room-table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+</style>
+<app-navbar></app-navbar>
+<section id="availability-section" class="availability-section section bg-pattern">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="heading-container">
+          <h2 class="heading" data-aos="fade-right">Check Room Availability</h2>
+          <!--<button class="btn btn-primary btn-show-booking logout-button" data-aos="fade-up" (click)="onLogout()">Logout</button>-->
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <form>
+          <div class="form-group">
+            <label for="pax">Number of Guests:</label>
+            <input type="number" id="pax" [(ngModel)]="pax" name="pax" min="1" max="4" required #paxField="ngModel" class="form-control" />
+            <div *ngIf="paxField.invalid && (paxField.dirty || paxField.touched)" class="error-message">
+              <div *ngIf="paxField.errors?.['required']">Number of guests is required.</div>
+              <div *ngIf="paxField.errors?.['min']">Number of guests must be at least 1.</div>
+              <div *ngIf="paxField.errors?.['max']">Number of guests cannot exceed 4.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="checkInDate">Check-In Date:</label>
+            <input type="date" id="checkInDate" [(ngModel)]="checkInDate" name="checkInDate" [attr.min]="today" [attr.max]="maxDate" required #checkInDateField="ngModel" class="form-control" />
+            <div *ngIf="checkInDateField.invalid && (checkInDateField.dirty || checkInDateField.touched)" class="error-message">
+              <div *ngIf="checkInDateField.errors?.['required']">Check-in date is required.</div>
+              <div *ngIf="checkInDateField.errors?.['min'] || checkInDateField.errors?.['max']">Check-in date must be between today and one year from today.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="checkOutDate">Check-Out Date:</label>
+            <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" name="checkOutDate" [attr.min]="today" [attr.max]="maxDate" required #checkOutDateField="ngModel" class="form-control" />
+            <div *ngIf="checkOutDateField.invalid && (checkOutDateField.dirty || checkOutDateField.touched)" class="error-message">
+              <div *ngIf="checkOutDateField.errors?.['required']">Check-out date is required.</div>
+              <div *ngIf="checkOutDateField.errors?.['min'] || checkOutDateField.errors?.['max']">Check-out date must be between today and one year from today.</div>
+            </div>
+          </div>
+
+          <button (click)="checkAvailability()" [disabled]="paxField.invalid || checkInDateField.invalid || checkOutDateField.invalid" class="btn btn-primary">Check Availability</button>
+
+          <div *ngIf="errorMessage" class="error-message">No Available Rooms at selected dates. Please make sure check-out date is later than check-in date!</div>
+        </form>
+      </div>
+    </div>
+
+    <div *ngIf="availableRooms.length > 0" class="row mt-5">
+      <div class="col-md-12">
+        <h3>Available Rooms</h3>
+        <table class="table table-striped room-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Guests</th>
+              <th>Price ($)</th>
+              <th>Select Room</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of availableRooms">
+              <td>{{ room.name }}</td>
+              <td><img [src]="getRoomImage(room.name)" alt="{{ room.name }}" class="room-image img-fluid" /></td>
+              <td>{{ room.pax }}</td>
+              <td>{{ room.price }}</td>
+              <td><input type="checkbox" [(ngModel)]="room.selected" class="custom-checkbox" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <button (click)="addToCart() " class="btn btn-primary">Add to Cart</button>
+        <p *ngIf="itemAddedToCart" class="notice">Selected item is added to cart!</p>
+
+      </div>
+    </div>
   </div>
+</section>
 
-  <label for="checkInDate">Check-In Date:</label>
-  <input type="date" id="checkInDate" [(ngModel)]="checkInDate" name="checkInDate" [attr.min]="today" [attr.max]="maxDate" required #checkInDateField="ngModel" />
-  <div *ngIf="checkInDateField.invalid && (checkInDateField.dirty || checkInDateField.touched)" class="error-message">
-    <div *ngIf="checkInDateField.errors?.['required']">Check-in date is required.</div>
-    <div *ngIf="checkInDateField.errors?.['min'] || checkInDateField.errors?.['max']">Check-in date must be between today and one year from today.</div>
-  </div>
 
-  <label for="checkOutDate">Check-Out Date:</label>
-  <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate" name="checkOutDate" [attr.min]="today" [attr.max]="maxDate" required #checkOutDateField="ngModel" />
-  <div *ngIf="checkOutDateField.invalid && (checkOutDateField.dirty || checkOutDateField.touched)" class="error-message">
-    <div *ngIf="checkOutDateField.errors?.['required']">Check-out date is required.</div>
-    <div *ngIf="checkOutDateField.errors?.['min'] || checkOutDateField.errors?.['max']">Check-out date must be between today and one year from today.</div>
-  </div>
 
-  <button (click)="checkAvailability()" [disabled]="paxField.invalid || checkInDateField.invalid || checkOutDateField.invalid">Check Availability</button>
+<app-cart></app-cart>
 
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
-  <div *ngIf="availableRooms.length > 0">
-    <h3>Available Rooms</h3>
-    <table class="room-table">
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Image</th>
-          <th>Room ID</th>
-          <th>Name</th>
-          <th>Guests</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let room of availableRooms">
-          <td><input type="checkbox" [(ngModel)]="room.selected" /></td>
-          <td><img [src]="getRoomImage(room.name)" alt="{{ room.name }}" class="room-image" /></td>
-          <td>{{ room.roomID }}</td>
-          <td>{{ room.name }}</td>
-          <td>{{ room.pax }}</td>
-          <td>{{ room.price | currency }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <button (click)="addToCart()">Add to Cart</button>
-  </div>
-</div>
+
+
+

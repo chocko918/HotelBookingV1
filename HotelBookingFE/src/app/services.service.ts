@@ -104,6 +104,20 @@ export class ServicesService {
     );
   }
 
+  logout(): Observable<any> {
+    // Call the logout endpoint if needed
+    return this.https.post<any>(`${this.APIUrl}/logout`, { }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteAllCartItems(): Observable<any> {
+    // Call the logout endpoint if needed
+    return this.https.delete<any>(`${this.APIUrl}/DeleteAllCartItem`, {}).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 
   //register(customer: CreateCustomerDTO): Observable<any> {
@@ -142,6 +156,8 @@ export class ServicesService {
       catchError(this.handleError)
     );
   }
+
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = '';

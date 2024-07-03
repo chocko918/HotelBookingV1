@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="../../../../assets/css/bootstrap.css">
-<link rel="stylesheet" href="../../../../assets/css/style.css">
+<link rel="stylesheet" href="../../../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../../../assets/css/style.css">
 
 <style>
   .customer-section {
@@ -33,12 +33,11 @@
   .main-container {
     display: flex;
     flex-direction: column;
-    padding-bottom:10px;
-/*    min-height: 60vh;*/
+    min-height: 100vh;
   }
 
   .footer-section {
-    margin-top: 0px;
+    margin-top: auto;
   }
 
   .room-image {
@@ -53,41 +52,43 @@
     margin-bottom: 20px;
   }
 
-  .bg-pattern {
-    /* Your background pattern styles */
-
-    background-repeat: repeat;
-  }
-
   .booking-details {
     flex-grow: 1;
   }
 </style>
 
+<app-navbar></app-navbar>
 <body>
   <div class="main-container">
-    <app-navbar></app-navbar> <!-- Assuming this is your header -->
-    <section class="customer-section bg-pattern">
+    <!--<section class="site-hero overlay customer-section" style="background-image: url('../../../assets/img/Restful Hotel.png')">-->
+    <section class="customer-section section  bg-pattern">
       <div class="container">
         <div class="customer-container justify-content-center align-items-center">
           <div>
-            <h2>{{ customerName }}'s Account Information</h2>
-            <ul>
-              <li><strong>Name:</strong> {{ customerName }}</li>
-              <li><strong>Email:</strong> {{ email }}</li>
-              <li><strong>Birthday:</strong> {{ birthday | date:'yyyy-MM-dd'}}</li>
-              <!--<li><strong>CustomerID:</strong> {{ user.customerID }}</li>-->
-            </ul>
+            <h2>Booking Information</h2>
+            <div *ngIf="BookingList.length > 0; else noBookings">
+              <div *ngFor="let booking of BookingList" class="booking-item">
+                <img [src]="getRoomImage(booking.name)" alt="{{ booking.name }}" class="room-image img-fluid" />
+                <div class="booking-details">
+                  <ul>
+                    <li><strong>Booked Rooms:</strong> {{ booking.name }}</li>
+                    <li><strong>Number of guests:</strong> {{ booking.pax }}</li>
+                    <li><strong>Check In Date:</strong> {{ booking.checkInDate | date:'yyyy-MM-dd'  }}</li>
+                    <li><strong>Check Out Date:</strong> {{ booking.checkOutDate | date:'yyyy-MM-dd' }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <ng-template #noBookings>
+              <p>No Bookings Yet, Time to book a room to rest!</p>
+            </ng-template>
           </div>
         </div>
       </div>
       <button routerLink="../roomAvailability" class="btn btn-primary btn-block btn-show-booking" data-aos="fade-up">Make a New Reservation</button>
       <button class="btn btn-primary btn-block btn-show-booking" data-aos="fade-up" (click)="onLogout()">Logout</button>
     </section>
-    <router-outlet></router-outlet> <!-- Your main content goes here -->
-    <footer class="footer-section">
-      <!-- Your footer content -->
-    </footer>
   </div>
 </body>
+<router-outlet></router-outlet>
 

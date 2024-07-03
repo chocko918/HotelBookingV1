@@ -11,5 +11,7 @@ namespace HotelBooking2.Repositories
         Task DeleteCartItemByID(Guid itemID);
 
         Task<decimal> TotalCartPrice();
+
+        Task DeleteAllCartItems();
     }
 }
