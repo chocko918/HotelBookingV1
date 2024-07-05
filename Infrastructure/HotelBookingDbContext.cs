@@ -45,6 +45,13 @@ namespace HotelBooking2.Infrastructure
             modelBuilder.Entity<Cart>()
                 .HasKey(br => new { br.ItemID });
 
+            // Define the relationship between Cart and Customer
+            modelBuilder.Entity<Cart>()
+                .HasOne(c => c.Customer)
+                .WithMany(cu => cu.Carts)
+                .HasForeignKey(c => c.CustomerID)
+                .OnDelete(DeleteBehavior.Cascade); ;
+
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
 
 

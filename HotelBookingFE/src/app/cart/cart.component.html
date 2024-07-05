@@ -86,6 +86,7 @@
         </tr>
       </tbody>
     </table>
+      <button (click)="deleteCartItemByCustomerID()" class="btn btn-danger">Delete All Cart Items</button>
     <button (click)="confirmCartItem()" class="btn btn-primary mt-3">Confirm Booking</button>
     <p *ngIf="cartItemConfirmed" class="notice">Booking is done for all items in cart!</p>
   </div>

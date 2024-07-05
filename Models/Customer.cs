@@ -23,5 +23,7 @@ namespace HotelBooking2.Models
         public DateTime Birthday { get; set; }
 
         public ICollection<Booking> Bookings { get; set; }
+
+        public ICollection<Cart> Carts { get; set; }
     }
 }

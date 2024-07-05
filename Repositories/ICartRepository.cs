@@ -4,7 +4,7 @@ namespace HotelBooking2.Repositories
 {
     public interface ICartRepository
     {
-        Task<Cart> AddItemToCartAsync(int roomId, DateTime checkInDate, DateTime checkOutDate);
+        Task<Cart> AddItemToCartAsync(Guid customerId, int roomId, DateTime checkInDate, DateTime checkOutDate);
 
         Task<List<Cart>> GetAllCartItems();
 
@@ -13,5 +13,11 @@ namespace HotelBooking2.Repositories
         Task<decimal> TotalCartPrice();
 
         Task DeleteAllCartItems();
+
+        Task<List<Cart>> GetCartItemsByCustomerID(Guid customerID);
+
+        Task<decimal> TotalCartPriceById(Guid customerID);
+
+        Task DeleteAllCartItemsByCustomerId(Guid customerID);
     }
 }

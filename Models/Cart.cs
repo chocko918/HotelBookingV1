@@ -32,5 +32,11 @@ namespace HotelBooking2.Models
         [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CheckOutDate { get; set; }
 
+        public Guid CustomerID { get; set; }
+        [Required]
+
+        [ForeignKey("CustomerID")]
+        public Customer Customer { get; set; }
+
     }
 }

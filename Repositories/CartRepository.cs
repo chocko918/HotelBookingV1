@@ -18,6 +18,13 @@ namespace HotelBooking2.Repositories
             return await _context.Carts.ToListAsync();
         }
 
+        public async Task<List<Cart>> GetCartItemsByCustomerID(Guid customerID)
+        {
+            return await _context.Carts
+                            .Where(c => c.CustomerID == customerID)
+                            .ToListAsync();
+        }
+
         //public async Task<Cart> AddItemToCartAsync(int roomId, DateTime checkInDate, DateTime checkOutDate)
         //{
         //    // Ensure that only the date part is considered
@@ -55,13 +62,14 @@ namespace HotelBooking2.Repositories
         //    return newItem;
         //}
 
-        public async Task<Cart> AddItemToCartAsync(int roomId, DateTime checkInDate, DateTime checkOutDate)
+        public async Task<Cart> AddItemToCartAsync(Guid customerId, int roomId, DateTime checkInDate, DateTime checkOutDate)
         {
             // Ensure that only the date part is considered
             checkInDate = checkInDate.Date;
             checkOutDate = checkOutDate.Date;
             // Check if item already exists in cart
             var existingCartItem = await _context.Carts.FirstOrDefaultAsync(c =>
+                c.CustomerID == customerId &&
                 c.RoomID == roomId &&
                 ((c.CheckInDate.Date >= checkInDate && c.CheckInDate.Date < checkOutDate) ||
                 (c.CheckOutDate.Date > checkInDate && c.CheckOutDate.Date <= checkOutDate)));
@@ -79,6 +87,7 @@ namespace HotelBooking2.Repositories
             var newItem = new Cart
             {
                 ItemID = Guid.NewGuid(),
+                CustomerID = customerId, // Assign CustomerID
                 RoomID = roomId,
                 Name = room.Name,
                 Price = room.Price,
@@ -102,6 +111,22 @@ namespace HotelBooking2.Repositories
             return totalPrice;
         }
 
+        public async Task<decimal> TotalCartPriceById(Guid customerID)
+        {
+
+            var allCartItems = await _context.Carts
+                .Where(c => c.CustomerID == customerID)
+                .ToListAsync();
+
+            // Calculate the total price by summing up the Price of each cart item
+            decimal totalPrice = allCartItems.Sum(cartItem => cartItem.Price);
+
+            // Return the total price
+            return totalPrice;
+
+        }
+
+
         public async Task DeleteCartItemByID(Guid itemID)
         {
             var cartItem = await _context.Carts.FirstOrDefaultAsync(c => c.ItemID == itemID);
@@ -118,6 +143,18 @@ namespace HotelBooking2.Repositories
             var allCartItems = await _context.Carts.ToListAsync();
             _context.Carts.RemoveRange(allCartItems);
             await _context.SaveChangesAsync();
+
+        }
+
+        public async Task DeleteAllCartItemsByCustomerId(Guid customerID)
+        {
+
+            var allCartItemsByCustomerId = await _context.Carts
+                .Where(c => c.CustomerID == customerID)
+                .ToListAsync();
+            _context.Carts.RemoveRange(allCartItemsByCustomerId);
+            await _context.SaveChangesAsync();
+
         }
 
 

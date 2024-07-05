@@ -51,7 +51,7 @@ export class ServicesService {
     );
   }
 
-  addItemToCart(roomID: number, checkInDate1: Date, checkOutDate1: Date): Observable<any> {
+  addItemToCart(customerID: string,roomID: number, checkInDate1: Date, checkOutDate1: Date): Observable<any> {
     const checkInDate = formatDate(checkInDate1, 'yyyy-MM-dd', 'en-US');
     const checkOutDate = formatDate(checkOutDate1, 'yyyy-MM-dd', 'en-US');
     //const params = new HttpParams()
@@ -60,6 +60,7 @@ export class ServicesService {
     //  .set('checkOutDate', formattedCheckOutDate);
     //console.log(roomID, checkInDate, checkOutDate);
     const params = {
+      customerID,
       roomID,
       checkInDate,
       checkOutDate
@@ -118,6 +119,27 @@ export class ServicesService {
     );
   }
 
+
+
+
+  deleteCartItemByCustomerId(customerID: string): Observable<any> {
+    const params = {
+      customerID,
+
+    }
+    return this.https.delete(this.APIUrl + '/DeleteAllCartItemByCustomerId', { params });
+  }
+
+  getCartItemsByCustomerID(customerID: string): Observable<any> {
+/*    const params = new HttpParams().set('customerID', customerID);*/
+    const params = {
+      customerID,
+
+    }
+    return this.https.get(`${this.APIUrl}/getCartItemsByCustomerID`, { params });
+  }
+
+  
 
 
   //register(customer: CreateCustomerDTO): Observable<any> {

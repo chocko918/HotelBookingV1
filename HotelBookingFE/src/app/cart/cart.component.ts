@@ -34,12 +34,16 @@ export class CartComponent implements OnInit {
   refreshCartList() {
 
     console.log("REFRESHED Cart")
-    this.service.getAllCartItems().subscribe(
+
+      const customerID = this.cookieService.get('customerID')
+    /*    this.service.getAllCartItems().subscribe(*/
+      console.log("MEOW MOEW",customerID);
+      this.service.getCartItemsByCustomerID(customerID).subscribe(
       (data: CartResponse) => {
         this.CartList = data.rooms;
         this.TotalPrice = data.totalPrice;
+        console.log(this.CartList)
         console.log(data)
-
       },
       error => {
         console.error('Error fetching cart items:', error);
@@ -48,6 +52,7 @@ export class CartComponent implements OnInit {
   }
 
   deleteCartItem(itemID: string): void {
+
     if (confirm("Are you sure you want to delete this item?")) {
       this.service.deleteCartItem(itemID).subscribe(response => {
         console.log("Item deleted:", response);
@@ -58,6 +63,21 @@ export class CartComponent implements OnInit {
     }
 
   }
+
+  deleteCartItemByCustomerID(): void {
+    const customerID = this.cookieService.get('customerID')
+    if (confirm("Are you sure you want to delete all cart items?")) {
+      this.service.deleteCartItemByCustomerId(customerID).subscribe(response => {
+        console.log("Item deleted:", response);
+        this.refreshCartList();
+      }, error => {
+        console.error("Error deleting item:", error);
+      });
+    }
+
+  }
+
+  
   confirmCartItem(): void {
     const customerID = this.cookieService.get('customerID');
     console.log(customerID);

@@ -1,4 +1,5 @@
-﻿using HotelBooking2.Models;
+﻿using Azure.Core;
+using HotelBooking2.Models;
 using HotelBooking2.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,49 @@ namespace HotelBooking2.Controllers
                 return BadRequest($"Error: {ex.Message}");
             }
         }
+        [HttpGet("getCartItemsByCustomerID")]
+        public async Task<IActionResult> GetCartItemsByCustomerID([FromQuery] GetBookingByCustomerIDRequest request)
+        {
+            if (Guid.TryParse(request.CustomerID, out Guid customerID))
+                try
+                {
+
+                    var rooms = await _cartRepository.GetCartItemsByCustomerID(customerID);
+                    var totalPrice = await _cartRepository.TotalCartPriceById(customerID);
+                    return Ok(new { rooms, totalPrice });
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error: {ex.Message}");
+                }
+            else
+            {
+                return BadRequest("Invalid CustomerID format.");
+            }
+        }
+
+
+        //[HttpPost("getBookingByCustomerID")]
+        //public async Task<IActionResult> GetBookingByCustomerID([FromBody] GetBookingByCustomerIDRequest request)
+        //{
+        //    if (Guid.TryParse(request.CustomerID, out Guid customerID))
+        //    {
+        //        try
+        //        {
+        //            var bookingsByCustomerID = await _bookingRepository.GetBookingByCustomerID(customerID);
+        //            return Ok(bookingsByCustomerID);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return BadRequest($"Error: {ex.Message}");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("Invalid CustomerID format.");
+        //    }
+        //}
+
 
         [HttpPost("addItemToCart")]
         public async Task<IActionResult> AddItemToCart([FromBody] AddItemToCartRequest request)
@@ -34,7 +78,7 @@ namespace HotelBooking2.Controllers
 
             try
             {
-                var cartItem = await _cartRepository.AddItemToCartAsync(request.RoomID, request.CheckInDate, request.CheckOutDate);
+                var cartItem = await _cartRepository.AddItemToCartAsync(request.CustomerID, request.RoomID, request.CheckInDate, request.CheckOutDate);
                 //var totalPrice = await _cartRepository.TotalCartPrice();
                 return Ok(cartItem);
             }
@@ -70,6 +114,25 @@ namespace HotelBooking2.Controllers
             catch (Exception ex)
             {
                 return BadRequest($"Error: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("DeleteAllCartItemByCustomerId")]
+        public async Task<IActionResult> DeleteAllCartItemsByCustomerId([FromQuery] GetBookingByCustomerIDRequest request)
+        {
+            if (Guid.TryParse(request.CustomerID, out Guid customerID))
+                try
+                {
+                    await _cartRepository.DeleteAllCartItemsByCustomerId(customerID);
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"Error: {ex.Message}");
+                }
+            else
+            {
+                return BadRequest("Invalid CustomerID format.");
             }
         }
 

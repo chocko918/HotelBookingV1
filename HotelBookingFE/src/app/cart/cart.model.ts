@@ -9,6 +9,7 @@ export interface CartItem {
   price: number;
   checkInDate: string;
   checkOutDate: string;
+  customerID: string;
 }
 
 // Interface for the response from the API

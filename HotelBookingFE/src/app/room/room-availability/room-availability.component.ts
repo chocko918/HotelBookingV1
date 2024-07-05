@@ -60,9 +60,9 @@ export class RoomAvailabilityComponent implements OnInit {
       this.errorMessage = 'Please select at least one room to add to cart.';
       return;
     }
-
+    const customerID = this.cookieService.get('customerID')
     selectedRooms.forEach((room: any) => {
-      this.service.addItemToCart(room.roomID, this.checkInDate, this.checkOutDate).subscribe(
+      this.service.addItemToCart(customerID, room.roomID, this.checkInDate, this.checkOutDate).subscribe(
         data => {
           console.log('Room added to cart:', data);
           this.errorMessage = '';
