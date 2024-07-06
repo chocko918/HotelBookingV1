@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { ServicesService } from '../services.service'; // Import your authentication service
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +12,7 @@ export class NavbarComponent implements OnInit {
   isLoggedIn = !!this.cookieService.get('customerID');
   
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private service:ServicesService, private route: Router ) { }
 
   ngOnInit() {
     console.log(this.isLoggedIn);
@@ -20,10 +22,19 @@ export class NavbarComponent implements OnInit {
     //this.isLoggedIn = !!customerID; // true if customerID exists
   }
 
+
+
   logout() {
-    // Implement your logout logic here
-    this.cookieService.delete('customerID');
-    this.isLoggedIn = false;
-    console.log('User logged out');
+    this.service.logout().subscribe(
+      () => {
+        this.isLoggedIn = false;
+        console.log('User logged out');
+        this.cookieService.deleteAll();
+
+      },
+      error => {
+        console.error('Logout error', error);
+      }
+    );
   }
 }

@@ -32,7 +32,7 @@ export class BookinginfoComponent implements OnInit {
     const customerID = this.cookieService.get('customerID');
     console.log("thisss", customerID);
     if (!customerID) {
-      console.error('CustomerID not found in cookies.');
+      console.error('CustomerID not found');
       return;
     }
 
@@ -51,29 +51,8 @@ export class BookinginfoComponent implements OnInit {
 
   }
 
-  onLogout() {
-    this.service.logout().subscribe(
-      () => {
-        // Clear the JWT token from localStorage
-        this.cookieService.deleteAll();
-        this.service.deleteAllCartItems().subscribe(
-          () => {
-            // Clear the JWT token from localStorage
-            console.log("all cart items deleted")
-
-          },
-          error => {
-            console.error('Logout error', error);
-          }
-        )
-        // Redirect to the login page
-        this.route.navigate(['/login']);
-      },
-      error => {
-        console.error('Logout error', error);
-      }
-    );
-  }
+ 
+ 
 
   getRoomImage(roomName: string): string {
     return `assets/RoomImages/${roomName}.png`;
@@ -81,3 +60,4 @@ export class BookinginfoComponent implements OnInit {
   }
 
 }
+

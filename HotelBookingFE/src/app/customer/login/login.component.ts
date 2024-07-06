@@ -66,10 +66,8 @@ export class LoginComponent {
       () => {
         // Clear the JWT token from localStorage
         this.cookieService.delete('customerID');
-        this.authService.deleteAllCartItems();
         // Redirect to the login page
         this.router.navigate(['/login']);
-        this.authService.deleteAllCartItems();
       },
       error => {
         console.error('Logout error', error);
